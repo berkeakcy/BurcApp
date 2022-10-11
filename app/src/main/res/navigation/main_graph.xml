@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/gunlukburc_graph">
+
+    <include app:graph="@navigation/aylikburc_graph" />
+    <include app:graph="@navigation/burcgenelozellik_graph" />
+    <include app:graph="@navigation/gunlukburc_graph" />
+    <include app:graph="@navigation/haftalikburc_graph" />
+    <include app:graph="@navigation/yillikburc_graph" />
+</navigation>
