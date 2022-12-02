@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "915037728688",
+    "project_id": "burcapp-65902",
+    "storage_bucket": "burcapp-65902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915037728688:android:d5c61b2714ed5582f6b075",
+        "android_client_info": {
+          "package_name": "com.berkeakcy.burcapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915037728688-20ktj543nqt1felug8l5hrnafjfq7opf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsfbF-f8k-0El503Bq2ek5CpKp0jOdPyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915037728688-20ktj543nqt1felug8l5hrnafjfq7opf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,9 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/gunlukburc_graph"
-    app:startDestination="@id/burclarFragmentGunluk">
+    app:startDestination="@id/burclarFragment">
     <fragment
-        android:id="@+id/burclarFragmentGunluk"
+        android:id="@+id/burclarFragment"
         android:name="com.berkeakcy.burcapp.BurclarFragment"
-        android:label="BurclarFragment" />
+        android:label="BurclarFragment" >
+        <action
+            android:id="@+id/action_burclarFragment_to_burcIcerikFragment"
+            app:destination="@id/burcIcerikFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/burcIcerikFragment"
+        android:name="com.berkeakcy.burcapp.BurcIcerikFragment"
+        android:label="BurcIcerikFragment" >
+        <argument
+            android:name="burc"
+            app:argType="com.berkeakcy.burcapp.Burclar" />
+    </fragment>
 </navigation>

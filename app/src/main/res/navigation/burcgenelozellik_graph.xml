@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/burcgenelozellik_graph">
-
+    android:id="@+id/burcgenelozellik_graph"
+    app:startDestination="@id/burclarFragment">
+    <fragment
+        android:id="@+id/burcIcerikFragment"
+        android:name="com.berkeakcy.burcapp.BurcIcerikFragment"
+        android:label="BurcIcerikFragment">
+        <argument
+            android:name="burc"
+            app:argType="com.berkeakcy.burcapp.Burclar" />
+    </fragment>
+    <fragment
+        android:id="@+id/burclarFragment"
+        android:name="com.berkeakcy.burcapp.BurclarFragment"
+        android:label="BurclarFragment">
+        <action
+            android:id="@+id/action_burclarFragment_to_burcIcerikFragment"
+            app:destination="@id/burcIcerikFragment" />
+    </fragment>
 </navigation>
