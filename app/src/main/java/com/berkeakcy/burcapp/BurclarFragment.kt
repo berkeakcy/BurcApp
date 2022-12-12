@@ -2,17 +2,14 @@ package com.berkeakcy.burcapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.berkeakcy.burcapp.databinding.FragmentBurclarBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 class BurclarFragment : Fragment() {
     private lateinit var binding:FragmentBurclarBinding
@@ -39,7 +36,6 @@ class BurclarFragment : Fragment() {
         binding.rvBurc.layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
         adapter = BurclarAdapter(requireContext(),burcList)
         binding.rvBurc.adapter = adapter
-
 
     }
 
@@ -74,6 +70,7 @@ class BurclarFragment : Fragment() {
             }
         }
     }
+
 
 
 }

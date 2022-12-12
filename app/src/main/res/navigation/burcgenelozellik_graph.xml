@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/burcIcerikFragment"
         android:name="com.berkeakcy.burcapp.BurcIcerikFragment"
-        android:label="BurcIcerikFragment">
+        android:label="Genel Özellikler">
         <argument
             android:name="burc"
             app:argType="com.berkeakcy.burcapp.Burclar" />
@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/burclarFragment"
         android:name="com.berkeakcy.burcapp.BurclarFragment"
-        android:label="BurclarFragment">
+        android:label="Genel Özellikler">
         <action
             android:id="@+id/action_burclarFragment_to_burcIcerikFragment"
             app:destination="@id/burcIcerikFragment" />

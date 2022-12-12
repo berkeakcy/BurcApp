@@ -2,11 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/yillikburc_graph"
+    android:label="Yıllık Burçlar"
     app:startDestination="@id/burclarFragment">
     <fragment
         android:id="@+id/burcIcerikFragment"
         android:name="com.berkeakcy.burcapp.BurcIcerikFragment"
-        android:label="BurcIcerikFragment">
+        android:label="Yıllık Burçlar">
         <argument
             android:name="burc"
             app:argType="com.berkeakcy.burcapp.Burclar" />
@@ -14,7 +15,7 @@
     <fragment
         android:id="@+id/burclarFragment"
         android:name="com.berkeakcy.burcapp.BurclarFragment"
-        android:label="BurclarFragment">
+        android:label="Yıllık Burçlar">
         <action
             android:id="@+id/action_burclarFragment_to_burcIcerikFragment"
             app:destination="@id/burcIcerikFragment" />
