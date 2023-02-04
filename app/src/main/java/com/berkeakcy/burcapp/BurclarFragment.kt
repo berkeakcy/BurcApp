@@ -1,76 +1,65 @@
 package com.berkeakcy.burcapp
 
-import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.berkeakcy.burcapp.databinding.FragmentBurclarBinding
-import com.google.firebase.firestore.FirebaseFirestore
 
 class BurclarFragment : Fragment() {
     private lateinit var binding:FragmentBurclarBinding
-    private lateinit var database : FirebaseFirestore
     private lateinit var adapter : BurclarAdapter
+    private lateinit var burclarViewModel: BurclarViewModel
 
     var burcList = ArrayList<Burclar>()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        database = FirebaseFirestore.getInstance()
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBurclarBinding.inflate(inflater)
-        getVeriler()
+        burclarViewModel = ViewModelProvider(this,BurclarViewModelFactory(BurclarRepositoryImp())).get(BurclarViewModel::class.java)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //getVeriler()
-        binding.rvBurc.layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
-        adapter = BurclarAdapter(requireContext(),burcList)
-        binding.rvBurc.adapter = adapter
-
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun getVeriler(){
-        database.collection("Burc").addSnapshotListener{ snapshot, exception -> //whereEqualTo filtre öğren
-            if(exception != null){
-                Toast.makeText(requireContext(),exception.localizedMessage,Toast.LENGTH_LONG).show()
-            }
-            else{
-                if(snapshot != null){
-                    if(!snapshot.isEmpty){
-                        val veriler = snapshot.documents
-
-                        burcList.clear()
-
-                        for(i in veriler){
-                            val burc_ad = i.get("burc_ad") as String
-                            val burc_img = i.get("burc_img") as String
-                            val burc_tarih = i.get("burc_tarih") as String
-                            val burc_gunluk = i.get("burc_gunluk") as String
-                            val burc_haftalik = i.get("burc_haftalik") as String
-                            val burc_aylik = i.get("burc_aylik") as String
-                            val burc_yillik = i.get("burc_yillik") as String
-                            val burc_genelozellik = i.get("burc_genelozellik") as String
-
-                            burcList.add(Burclar(burc_ad,burc_img,burc_tarih,burc_gunluk,burc_haftalik,burc_aylik,burc_yillik,burc_genelozellik))
-                        }
-                        binding.rvBurc.adapter?.notifyDataSetChanged()//yeni veri geldi kendini yenile
+        burclarViewModel.burcList.observe(viewLifecycleOwner){state ->
+            when(state){
+                is UIState.Loading ->  Log.e("BurclarFragment","Loading")
+                is UIState.Failure ->  Log.e("BurclarFragment","error")
+                is UIState.Success -> {
+                    state.data.forEach{
+                        burcList.add(it)
+                        binding.rvBurc.adapter?.notifyDataSetChanged()
                     }
                 }
             }
         }
+        binding.rvBurc.layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
+        adapter = BurclarAdapter(requireContext(),burcList)
+        binding.rvBurc.adapter = adapter
+
+
+        binding.swipeLayoutOne.setOnRefreshListener {
+            burclarViewModel.getBurclar()
+            burclarViewModel.burcList.observe(viewLifecycleOwner){state ->
+                burcList.clear()
+                when(state){
+                    is UIState.Loading ->  Log.e("BurclarFragment","Loading")
+                    is UIState.Failure ->  Log.e("BurclarFragment","error")
+                    is UIState.Success -> {
+                        state.data.forEach{
+                            burcList.add(it)
+                            //binding.rvBurc.adapter?.notifyDataSetChanged()
+                        }
+                    }
+                }
+            }
+            binding.swipeLayoutOne.isRefreshing = false
+        }
     }
-
-
-
 }
