@@ -13,9 +13,6 @@ class BurcIcerikViewModel(val toolbarTitle:String, val burc: Burclar,val reposit
     private val _icerik = MutableLiveData<String>()
     val icerik : LiveData<String> get() = _icerik
 
-    private val _burcList = MutableLiveData<UIState<ArrayList<Burclar>>>()
-    val burcList : LiveData<UIState<ArrayList<Burclar>>> get() = _burcList
-
     private val _icerikUpdate = MutableLiveData<UIState<String>>()
     val icerikUpdate : LiveData<UIState<String>> get() = _icerikUpdate
 
@@ -51,7 +48,7 @@ class BurcIcerikViewModel(val toolbarTitle:String, val burc: Burclar,val reposit
                 _date.value = calendar.get(Calendar.YEAR).toString()
             }
             "Genel Özellikler" -> {
-                _icerik.value = burc.burc_genelozellik
+                _icerik.value = burc.burc_genelozellik.replace("_b","\n")
                 _date.value = burc.burc_ad + " Burcunun Genel Özellikleri"
             }
         }

@@ -2,13 +2,16 @@ package com.berkeakcy.burcapp
 
 import com.berkeakcy.burcapp.Burclar.Companion.toBurclar
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 
 class BurclarRepositoryImp:BurclarRepository {
     private lateinit var database: FirebaseFirestore
+    private lateinit var storage : FirebaseStorage
     override fun getBurclar(result: (UIState<ArrayList<Burclar>>) -> Unit){
         val data = arrayListOf<Burclar>()
         database = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
         database.collection("Burc").orderBy("burc_ad").get().addOnSuccessListener {
             for (document in it){
                 val burc = document.toBurclar()
@@ -78,7 +81,7 @@ class BurclarRepositoryImp:BurclarRepository {
         val document = database.collection("Burc").whereEqualTo("burc_ad",burc.burc_ad).get().addOnSuccessListener {
             for (doc in it){
                 doc.getString("burc_genelozellik")?.let {
-                    result.invoke(UIState.Success(it))
+                    result.invoke(UIState.Success(it.replace("_b","\n")))
                 }
             }
         }.addOnFailureListener{

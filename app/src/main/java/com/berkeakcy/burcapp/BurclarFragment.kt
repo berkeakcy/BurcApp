@@ -14,7 +14,6 @@ class BurclarFragment : Fragment() {
     private lateinit var binding:FragmentBurclarBinding
     private lateinit var adapter : BurclarAdapter
     private lateinit var burclarViewModel: BurclarViewModel
-
     var burcList = ArrayList<Burclar>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +27,7 @@ class BurclarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         burclarViewModel.burcList.observe(viewLifecycleOwner){state ->
+            burcList.clear()
             when(state){
                 is UIState.Loading ->  Log.e("BurclarFragment","Loading")
                 is UIState.Failure ->  Log.e("BurclarFragment","error")
@@ -54,7 +54,7 @@ class BurclarFragment : Fragment() {
                     is UIState.Success -> {
                         state.data.forEach{
                             burcList.add(it)
-                            //binding.rvBurc.adapter?.notifyDataSetChanged()
+                            binding.rvBurc.adapter?.notifyDataSetChanged()
                         }
                     }
                 }

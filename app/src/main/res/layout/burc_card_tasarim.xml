@@ -23,14 +23,17 @@
             android:id="@+id/burc_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:maxHeight="50dp"
+            android:maxWidth="50dp"/>
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/burc_ad_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
         android:text="Koç"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -44,8 +47,9 @@
         android:id="@+id/burc_tarih_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
+        android:fontFamily="@font/roboto"
         android:text="22 Temmuz - 20 Ağustos"
         android:textColor="#FFFFFF"
         android:textSize="16sp"

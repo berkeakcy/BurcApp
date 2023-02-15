@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity(){
         binding.navigationView.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(navController.graph,binding.drawer)
         binding.toolbar.setupWithNavController(navController,appBarConfiguration)
-
     }
 
     override fun onBackPressed() {

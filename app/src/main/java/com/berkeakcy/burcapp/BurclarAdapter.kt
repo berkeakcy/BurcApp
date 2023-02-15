@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
+import com.squareup.picasso.Picasso
 
 class BurclarAdapter(private val mContext:Context, private var burcList:ArrayList<Burclar>)
     :RecyclerView.Adapter<BurclarAdapter.BurclarCardTasarim>(){
@@ -25,7 +25,6 @@ class BurclarAdapter(private val mContext:Context, private var burcList:ArrayLis
                 burc_tarih = tasarim.findViewById(R.id.burc_tarih_text)
             }
         }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BurclarCardTasarim {
         val tasarim = LayoutInflater.from(mContext).inflate(R.layout.burc_card_tasarim,parent,false)
         return BurclarCardTasarim(tasarim)
@@ -35,12 +34,11 @@ class BurclarAdapter(private val mContext:Context, private var burcList:ArrayLis
         val burc = burcList.get(position)
         holder.burc_ad.text = burcList[position].burc_ad
         holder.burc_tarih.text = burcList[position].burc_tarih
-        holder.burc_img.setImageResource(mContext.resources.getIdentifier(burcList[position].burc_img,"drawable",mContext.packageName))
+        Picasso.get().load(burcList[position].burc_img).into(holder.burc_img)
         holder.burc_card.setOnClickListener(){
             it.findNavController().navigate(BurclarFragmentDirections.actionBurclarFragmentToBurcIcerikFragment(burc))
         }
     }
-
     override fun getItemCount(): Int {
         return burcList.size
     }
